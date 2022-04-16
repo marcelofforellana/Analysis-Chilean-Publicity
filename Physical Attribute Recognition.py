@@ -46,9 +46,7 @@ import GPUtil
 #%%
 
 # Pytesseract for text recognition
-pytesseract.pytesseract.tesseract_cmd= r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-
-# https://towardsdatascience.com/read-text-from-image-with-one-line-of-python-code-c22ede074cac
+pytesseract.pytesseract.tesseract_cmd= r"...\tesseract.exe"
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -99,7 +97,7 @@ model_tag = 'seqMT'
 model_id = '{:s}_{:s}'.format(model_type, model_tag)
 # model_dir = r"C:\Users\marce\Desktop\Tesis\Auto face recognition\AIML-Human-Attributes-Detection-with-Facial-Feature-Extraction-master\face2bmimaster\saved_model\model_{:s}.h5".format(model_id)
 
-model_dir = r"C:\Users\marce\OneDrive\Escritorio\Face to BMI\secure\face2bmi-master\saved_model\model_7_best.h5"
+model_dir = r"...\saved_model\model_7_best.h5"
 bs = 5
 
 epochs = 2
@@ -116,23 +114,23 @@ from pathlib import Path
 from scripts.models import FacePrediction
 import glob
 
-allimages = os.listdir(r"C:\Users\marce\OneDrive\Escritorio\Face to BMI\secure\face2bmi-master\data\face_aligned")
-train = pd.read_csv(r"C:\Users\marce\OneDrive\Escritorio\Face to BMI\secure\face2bmi-master\data\train.csv")
-valid = pd.read_csv(r"C:\Users\marce\OneDrive\Escritorio\Face to BMI\secure\face2bmi-master\data\valid.csv")
+allimages = os.listdir(r"...\face_aligned")
+train = pd.read_csv(r"...\train.csv")
+valid = pd.read_csv(r"...\valid.csv")
 
 train = train.loc[train['index'].isin(allimages)]
 valid = valid.loc[valid['index'].isin(allimages)]
 
 # create metrics, model dirs
-Path(r"C:\Users\marce\OneDrive\Escritorio\Tesis\Auto face recognition\AIML-Human-Attributes-Detection-with-Facial-Feature-Extraction-master\face2bmimaster\metrics").mkdir(parents = True, exist_ok = True)
-Path(r"C:\Users\marce\OneDrive\Escritorio\Tesis\Auto face recognition\AIML-Human-Attributes-Detection-with-Facial-Feature-Extraction-master\face2bmimaster\saved_model").mkdir(parents = True, exist_ok = True)
+Path(r"...\metrics").mkdir(parents = True, exist_ok = True)
+Path(r"...\saved_model").mkdir(parents = True, exist_ok = True)
 
 es = EarlyStopping(patience=3)
 ckp = ModelCheckpoint(model_dir, save_best_only=True, save_weights_only=True, verbose=1)
 tb = TensorBoard('./tb/%s'%(model_id))
 callbacks = [es, ckp]
 
-model_bmi = FacePrediction(img_dir = r"C:\Users\marce\OneDrive\Escritorio\Face to BMI\secure\face2bmi-master\data\face_aligned", model_type = model_type)
+model_bmi = FacePrediction(img_dir = r"...\face_aligned", model_type = model_type)
 model_bmi.define_model(freeze_backbone = freeze_backbone)
 
 if mode == 'train':
@@ -481,4 +479,4 @@ data_collection = pd.DataFrame(data)
 
 
 
-data_collection.to_csv(r"D:\Franja Electoral\\Artes.csv",index=False)
+data_collection.to_csv(r"\data.csv",index=False)
