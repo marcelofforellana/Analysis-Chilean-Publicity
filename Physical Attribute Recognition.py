@@ -95,7 +95,6 @@ model_type = 'vgg16'
 model_tag = 'seqMT'
 
 model_id = '{:s}_{:s}'.format(model_type, model_tag)
-# model_dir = r"C:\Users\marce\Desktop\Tesis\Auto face recognition\AIML-Human-Attributes-Detection-with-Facial-Feature-Extraction-master\face2bmimaster\saved_model\model_{:s}.h5".format(model_id)
 
 model_dir = r"...\saved_model\model_7_best.h5"
 bs = 5
